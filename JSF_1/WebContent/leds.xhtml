@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+	<ui:define name="header">
+		<h1 class="ueberschrft">LED's</h1>
+	</ui:define>
+
+	<ui:define name="content">
+		<p:dataTable id="ltable" tableStyle="width: auto" var="x" value="#{carBean.lightsystems}">
+			<p:column headerText="Name">
+				<h:outputText value="#{x}" />
+			</p:column>
+		</p:dataTable>
+	</ui:define>
+
+
+</ui:composition>

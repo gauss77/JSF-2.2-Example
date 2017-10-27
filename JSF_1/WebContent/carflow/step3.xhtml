@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<ui:composition template="/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+
+
+	<ui:define name="header">
+		<h1 class="ueberschrft">#{msgs.cars}</h1>
+	</ui:define>
+
+	<ui:define name="content">
+
+		<h:form>
+			<h:panelGrid columns="3" id="grid">
+				<h:outputLabel value="Engine:" for="engine" />
+				<p:selectOneMenu id="engine" value="#{flowBean.engine}"
+					converter="#{engineConverter}">
+					<f:selectItems value="#{carBean.engines}" var="x"
+						itemLabel="#{x.powerInKw} kW - #{x.fuelType}" itemValue="#{x}" />
+					<f:ajax execute="@this" render="Grafik"
+						listener="#{flowBean.changefoto(x)}" />
+				</p:selectOneMenu>
+				<h:outputLabel />
+
+				<h:outputLabel value="Communication System:" for="cs" />
+				<p:selectOneMenu id="cs" value="#{flowBean.communicationSystem}"
+					converter="#{communicationConverter}">
+					<f:selectItems value="#{carBean.comSystem}" var="x"
+						itemLabel="#{x.name}" itemValue="#{x}" />
+				</p:selectOneMenu>
+				<h:outputLabel />
+
+				<h:outputLabel value="LED's" for="led" />
+				<p:selectOneMenu id="led" value="#{flowBean.lightSystem}">
+					<f:selectItems value="#{carBean.lightsystems}" />
+				</p:selectOneMenu>
+				<h:outputLabel />
+
+				<h:graphicImage style="width:250px" id="Grafik"
+					url="#{flowBean.imageUrl}" />
+
+				<br />
+			</h:panelGrid>
+			<h:panelGrid columns="1" id="grid2">
+				<h:commandLink value="Save" action="save" />
+				<h:commandLink immediate="true" value="Back" action="step2" />
+				<h:commandLink immediate="true" value="Cancel" action="cancel" />
+			</h:panelGrid>
+		</h:form>
+	</ui:define>
+</ui:composition>

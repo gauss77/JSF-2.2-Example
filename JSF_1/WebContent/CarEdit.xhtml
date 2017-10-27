@@ -1,0 +1,61 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<ui:composition template="template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+
+
+	<ui:define name="header">
+		<h1 class="ueberschrft">#{msgs.cars}</h1>
+	</ui:define>
+
+	<ui:define name="content">
+
+		<h:form>
+			<h:panelGrid columns="3" id="grid">
+
+				<h:outputLabel value="Model:" for="model" />
+				<h:inputText pt:placeholder="Car Model Name"  id="model" value="#{editCarBean.model}" pt:list="autos">
+					<f:validator validatorId="carValidator" />
+				</h:inputText>
+				<p:message for="model" />
+
+			<h:outputLabel value="Engine:" for="engine" />
+				<p:selectOneMenu id="engine" value="#{editCarBean.engine}"
+					converter="#{engineConverter}">
+					<f:selectItems value="#{carBean.engines}" var="x"
+						itemLabel="#{x.powerInKw} kW - #{x.fuelType}" itemValue="#{x}" />
+					<f:ajax execute="@this" render="Grafik"
+						listener="#{editCarBean.changefoto(x)}" />
+				</p:selectOneMenu>
+				<h:outputLabel />
+
+				<h:outputLabel value="Communication System:" for="cs" />
+				<p:selectOneMenu id="cs" value="#{editCarBean.communicationSystem}"
+							converter="#{communicationConverter}">
+					<f:selectItems value="#{carBean.comSystem}" var="x"
+								itemLabel="#{x.name}" itemValue="#{x}" />
+				</p:selectOneMenu>
+				<h:outputLabel />
+
+				<h:outputLabel value="LED's" for="led" />
+				<p:selectOneMenu id="led" value="#{editCarBean.lightSystem}">
+					<f:selectItems value="#{carBean.lightsystems}" />
+				</p:selectOneMenu>
+				<h:outputLabel />
+
+				<h:graphicImage style="width:250px" id="Grafik"
+							url="#{editCarBean.imageUrl}" />
+
+				<br />
+
+				<h:commandButton value="Save" action="#{editCarBean.addCar}"></h:commandButton>
+			
+					</h:panelGrid>
+		</h:form>
+	</ui:define>
+</ui:composition>

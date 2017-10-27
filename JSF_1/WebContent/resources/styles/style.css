@@ -1,0 +1,51 @@
+
+
+.ueberschrft {
+	display: inline;
+	float: right;
+	margin-right: 15px;
+	margin-top: 44px;
+}
+
+.side {
+	position: relative;
+	height: 100%;
+}
+
+.language {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+}
+
+.cartable {
+	border-collapse: collapse;
+	width: auto;
+}
+
+.cartable th, td {
+	text-align: left;
+	padding: 8px;
+}
+
+.carTableOddRow {
+	background-color: #f2f2f2
+}
+
+.carTableEvenRow {
+	background-color: #ffffff
+}
+
+.carTableHeader {
+	background-color: #4CAF50 !important;
+	color: white;
+}
+
+.deleteicon {
+	color: red !important;
+	font-weight: bold !important;
+}
+
+.porschimage {
+	width: 250px;
+}

@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+
+	<ui:define name="header">
+		<h1 class="ueberschrft">#{msgs.cars}</h1>
+	</ui:define>
+
+	<ui:define name="content">
+
+		<h:form>
+			<h:commandButton value="Add Car" action="#{editCarBean.createCar}"></h:commandButton>
+			<h:commandButton value="Add Car Flow" action="carflow"></h:commandButton>
+			<br />
+			<br />
+
+
+			<h:dataTable id="cartable" var="car" value="#{carBean.cars}"
+				styleClass="carTable" 
+				headerClass="carTableHeader"
+				rowClasses="carTableOddRow,carTableEvenRow">
+				
+				<h:column headerText="Delete">
+					<f:facet name="header"></f:facet>
+					<h:commandLink styleClass="deleteicon" update="cartable" value="X"
+						action="#{carBean.deleteCar(car)}" />
+				</h:column>
+				
+				<h:column headerText="Id" sortBy="#{car.id}">
+				  <f:facet name="header">Id</f:facet>
+					<h:outputText value="#{car.id}" />
+				</h:column>
+
+				<h:column headerText="Model">
+				<f:facet name="header">Model</f:facet>
+					<h:commandLink value="#{car.model}"
+						action="#{editCarBean.configureCar(car)}" />
+				</h:column>
+
+				<h:column headerText="Engine">
+				<f:facet name="header">Engine</f:facet>
+					<h:outputText value="#{car.engine.id}" />
+				</h:column>
+
+				<h:column headerText="ReleaseDate">
+				<f:facet name="header">ReleaseDate</f:facet>
+					<h:outputText value="#{car.releaseDate}">
+						<f:convertDateTime pattern="dd.MM.yyyy" />
+					</h:outputText>
+				</h:column>
+			</h:dataTable>
+		</h:form>
+	</ui:define>
+</ui:composition>

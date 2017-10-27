@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+<f:view locale="#{localeBean.locale}">
+
+	<h:head>
+		<title>Template</title>
+	</h:head>
+	<h:body>
+		<h:outputStylesheet library="styles" name="style.css" />
+		<p:layout fullPage="true">
+			<p:layoutUnit position="north">
+				<h:form>
+					<h:graphicImage style="width:250px;display:inline" id="Grafik"
+						url="/resources/images/Porsche_logo.png" />
+					<ui:insert name="header">
+						<h1 class="ueberschrft">#{msgs.welcome}</h1>
+					</ui:insert>
+				</h:form>
+			</p:layoutUnit>
+			<p:layoutUnit position="west" size="300">
+				<h:form>
+					<nav>
+						<h:commandLink action="/template.xhtml">#{msgs.home}</h:commandLink>
+						<br />
+						<h:commandLink action="/cars.xhtml">#{msgs.listofCars}</h:commandLink>
+						<br />
+						<h:commandLink action="/engines.xhtml">#{msgs.listofEngines}</h:commandLink>
+						<br />
+						<h:commandLink action="/comsys.xhtml">#{msgs.listofComSystem}</h:commandLink>
+						<br />
+						<h:commandLink action="/leds.xhtml">#{msgs.listofLed}</h:commandLink>
+						<br />
+						<div class="language">
+							<h:selectOneMenu id="local" value="#{localeBean.localecode}">
+								<f:selectItem itemLabel="DE" itemValue="de" />
+								<f:selectItem itemLabel="EN" itemValue="en" />
+								<f:ajax execute="@this" render="@all"
+									listener="#{localeBean.checklocale}" />
+							</h:selectOneMenu>
+						</div>
+					</nav>
+
+				</h:form>
+			</p:layoutUnit>
+
+			<p:layoutUnit position="center">
+				<ui:insert name="content"></ui:insert>
+			</p:layoutUnit>
+
+		</p:layout>
+	</h:body>
+</f:view>
+</html>

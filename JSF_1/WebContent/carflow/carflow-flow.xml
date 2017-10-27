@@ -1,0 +1,43 @@
+<faces-config xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
+ http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd" version="2.2">
+
+  <flow-definition id="carflow">
+    <start-node>start</start-node>
+
+    <view id="start">
+      <vdl-document>/carflow/step1.xhtml</vdl-document>
+    </view>
+
+    <switch id="switchX">
+      <case>
+        <if>#{flowBean.porscheOrNot}</if>
+        <from-outcome>step2</from-outcome>
+      </case>
+      <default-outcome>cancel</default-outcome>
+    </switch>
+
+    <method-call id="save">
+      <method>#{flowBean.saveCarAction}</method>
+      <default-outcome>success</default-outcome>
+    </method-call>
+
+    <view id="step2">
+      <vdl-document>/carflow/step2.xhtml</vdl-document>
+    </view>
+
+    <view id="step3">
+      <vdl-document>/carflow/step3.xhtml</vdl-document>
+    </view>
+
+
+    <flow-return id="success">
+      <from-outcome>/cars</from-outcome>
+    </flow-return>
+
+    <flow-return id="cancel">
+      <from-outcome>/cars</from-outcome>
+    </flow-return>
+  </flow-definition>
+
+</faces-config>
